@@ -13,6 +13,7 @@ jQuery.fn.extend({
 			speedOut: 'normal',		// speed of the mouseout effect
 			hideDelay: 500,		  	// how long to delay the hiding of the caption after mouseout (ms)
 			animation: 'fade',	  	// 'fade' or 'slide'
+			anyTitle: false,
 			prefix: '',			  	// text/html to be placed at the beginning of every caption
 			className: 'caption'	// the name of the CSS class to apply to the caption box
 		}, o);
@@ -31,6 +32,7 @@ jQuery.fn.extend({
 				//just use the text in the title="..." attribute.
 				var captionLabelSrc = $('#' + $(this).attr('rel'));
 				var captionLabelTitle = !captionLabelSrc.length ? $(this).attr('title') : captionLabelSrc.html();
+				if (!captionLabelTitle.length && anyTitle) captionLabelTitle = $(this).closest('[title]').attr('title');
 				var captionLabelHTML = !captionLabelTitle.length ? $(this).attr('alt') : captionLabelTitle;
 				captionLabelSrc.remove();
 				var toWrap = this.parent && this.parent.tagName == 'a' ? this.parent : $(this);
